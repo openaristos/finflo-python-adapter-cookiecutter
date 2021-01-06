@@ -1,0 +1,9 @@
+{
+	"artifact_name": "my-adapter",
+	"adapter_name": "MyAdapter",
+	"adapter_code": "{{ cookiecutter.adapter_name|lower|replace(' ', '_') }}",
+	"adapter_description": "MyAdapter Description",
+	"adapter_author": "John Doe",
+	"adapter_perspective": "customer",
+	"adapter_migrations_uri": "s3://bakplane-dev-migrations-internal/{{ cookiecutter.adapter_name|lower|replace(' ', '_') }}"
+}

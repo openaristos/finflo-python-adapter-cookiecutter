@@ -1,0 +1,12 @@
+{
+    "name": "{{cookiecutter.adapter_name}}",
+    "code": "{{cookiecutter.adapter_code}}",
+    "description": "{{cookiecutter.adapter_description}}",
+    "weight": 90,
+    "permanent_attributes": [
+        {
+            "entity_type_code": "economic_indicator",
+            "attribute_code": "series"
+        }
+    ]
+}

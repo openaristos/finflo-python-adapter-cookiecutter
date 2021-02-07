@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-black bakplane/
+black {{cookiecutter.adapter_code}}/

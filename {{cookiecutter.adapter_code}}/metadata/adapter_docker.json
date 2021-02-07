@@ -65,12 +65,12 @@
         }
     ],
     "execution_profile": {
-        "engine_kind": "lambda",
+        "engine_kind": "docker",
         "streaming": false,
         "context": [
             {
-                "key": "functionArn",
-                "value": "arn:aws:lambda:us-east-2:xxxxxxxxx:function:{{cookiecutter.adapter_code}}",
+                "key": "imageName",
+                "value": "{{cookiecutter.adapter_code}}:latest",
                 "data_type": "string"
             }
         ]

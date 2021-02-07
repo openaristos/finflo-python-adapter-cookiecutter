@@ -1,5 +1,3 @@
-.vscode/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -118,12 +116,10 @@ results
 
 # Pycharm
 .idea/
-.idea
 
 .DS_Store
 
 # Private
 .private
 *.dirlock
-
 output/

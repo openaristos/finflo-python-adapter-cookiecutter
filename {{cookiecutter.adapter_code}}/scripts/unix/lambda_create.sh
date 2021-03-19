@@ -5,5 +5,5 @@ aws lambda create-function \
     --package-type Image \
     --timeout 900 \
     --memory-size 4096 \
-    --role arn:aws:iam::xxxxxxxxxxxxxx:role/openaristos-lambda-role \
-    --code ImageUri=xxxxxxxxxxxxxx.dkr.ecr.us-east-2.amazonaws.com/{{cookiecutter.adapter_code}}:latest
+    --role arn:aws:iam::{{cookiecutter.aws_account_id}}:role/openaristos-lambda-role \
+    --code ImageUri={{cookiecutter.aws_account_id}}.dkr.ecr.{{cookiecutter.aws_region}}.amazonaws.com/{{cookiecutter.adapter_code}}:latest

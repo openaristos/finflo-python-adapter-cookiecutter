@@ -1,9 +1,12 @@
 #!/bin/sh
 
+AWS_REGION=${1:-{{cookiecutter.aws_region}}}
+AWS_ACCOUNT_ID=${2:-{{cookiecutter.aws_account_id}}}
+
 aws lambda create-function \
     --function-name ons \
     --package-type Image \
     --timeout 900 \
     --memory-size 4096 \
-    --role arn:aws:iam::{{cookiecutter.aws_account_id}}:role/openaristos-lambda-role \
-    --code ImageUri={{cookiecutter.aws_account_id}}.dkr.ecr.{{cookiecutter.aws_region}}.amazonaws.com/{{cookiecutter.adapter_code}}:latest
+    --role arn:aws:iam::$AWS_ACCOUNT_ID:role/openaristos-lambda-role \
+    --code ImageUri=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/{{cookiecutter.adapter_code}}:latest

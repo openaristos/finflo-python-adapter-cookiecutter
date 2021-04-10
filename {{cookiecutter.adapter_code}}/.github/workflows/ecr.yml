@@ -30,7 +30,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ '{{' }} steps.login-ecr.outputs.registry {{ '}}' }}
           ECR_REPOSITORY: {{cookiecutter.adapter_code}}
-          IMAGE_TAG: latest
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -f ./Dockerfile.aws -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

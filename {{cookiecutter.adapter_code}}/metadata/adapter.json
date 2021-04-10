@@ -64,17 +64,30 @@
             "context": []
         }
     ],
-    "execution_profile": {
-        "engine_kind": "lambda",
-        "streaming": false,
-        "context": [
-            {
-                "key": "functionArn",
-                "value": "arn:aws:lambda:us-east-2:xxxxxxxxx:function:{{cookiecutter.adapter_code}}",
-                "data_type": "string"
-            }
-        ]
-    },
+    "execution_profiles": [
+        {
+            "engine_kind": "lambda",
+            "streaming": false,
+            "context": [
+                {
+                    "key": "functionArn",
+                    "value": "arn:aws:lambda:us-east-2:xxxxxxxxx:function:{{cookiecutter.adapter_code}}",
+                    "data_type": "string"
+                }
+            ]
+        },
+        {
+            "engine_kind": "docker",
+            "streaming": false,
+            "context": [
+                {
+                    "key": "imageName",
+                    "value": "{{cookiecutter.adapter_code}}:latest",
+                    "data_type": "string"
+                }
+            ]
+        }
+    ],
     "parameters": [
         {
             "key": "input_location",

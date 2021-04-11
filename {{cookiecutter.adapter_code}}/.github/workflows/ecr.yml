@@ -44,3 +44,9 @@ jobs:
           AWS_ACCOUNT_ID: {{cookiecutter.aws_account_id}}
         run: |
           aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Remove Migrations
+        run: aws s3 rm {{cookiecutter.adapter_migrations_uri}}/ --recursive
+
+      - name: Upload Migrations
+        run: aws s3 cp ./migrations/ {{cookiecutter.adapter_migrations_uri}}/ --recursive

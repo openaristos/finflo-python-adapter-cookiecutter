@@ -44,13 +44,3 @@ jobs:
           AWS_ACCOUNT_ID: {{cookiecutter.aws_account_id}}
         run: |
           aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
-
-      - name: Update Development Lambda
-        env:
-          ECR_REPOSITORY: {{cookiecutter.adapter_code}}
-          LAMBDA_NAME: {{cookiecutter.adapter_code}}-development
-          IMAGE_TAG: ${{ github.sha }}
-          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          AWS_ACCOUNT_ID: {{cookiecutter.aws_account_id}}
-        run: |
-          aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG

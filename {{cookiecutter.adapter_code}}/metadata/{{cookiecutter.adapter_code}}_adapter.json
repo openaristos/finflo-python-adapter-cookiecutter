@@ -86,6 +86,17 @@
                     "data_type": "string"
                 }
             ]
+        },
+        {
+            "engine_kind": "kubernetes",
+            "streaming": false,
+            "context": [
+                {
+                    "key": "imageName",
+                    "value": "{{cookiecutter.adapter_code}}:latest",
+                    "data_type": "string"
+                }
+            ]
         }
     ],
     "parameters": [

@@ -32,8 +32,10 @@ jobs:
           ECR_REPOSITORY: {{cookiecutter.adapter_code}}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -f ./Dockerfile.aws -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -f ./Dockerfile.lambda -t $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}lambda .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}lambda
+          docker build -f ./Dockerfile.kubernetes -t $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}kubernetes .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}kubernetes
 
       - name: Update Production Lambda
         env:
@@ -43,7 +45,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_ACCOUNT_ID: {{cookiecutter.aws_account_id}}
         run: |
-          aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+          aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${IMAGE_TAG}lambda
 
       - name: Remove Migrations
         run: aws s3 rm {{cookiecutter.adapter_migrations_uri}}/ --recursive

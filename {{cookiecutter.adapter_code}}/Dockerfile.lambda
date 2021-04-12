@@ -19,4 +19,4 @@ RUN yum remove -y gcc gcc-c++ && yum -y clean all && rm -rf /var/cache/yum
 
 COPY . .
 
-CMD [ "{{cookiecutter.adapter_code}}.app.handler" ]
+CMD [ "{{cookiecutter.adapter_code}}.executors.lambda.handler" ]

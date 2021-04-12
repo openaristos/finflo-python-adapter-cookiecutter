@@ -6,4 +6,4 @@ IMAGE_TAG=$(git rev-parse HEAD)
 
 aws lambda update-function-code \
     --function-name {{cookiecutter.adapter_code}} \
-    --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/{{cookiecutter.adapter_code}}:${IMAGE_TAG}lambda
+    --image-uri ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/{{cookiecutter.adapter_code}}:${IMAGE_TAG}lambda

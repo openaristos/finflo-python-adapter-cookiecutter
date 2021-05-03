@@ -18,9 +18,9 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ '{{' }} secrets.AWS_ACCESS_KEY_ID {{ '}}' }}
-          aws-secret-access-key: ${{ '{{' }} secrets.AWS_SECRET_ACCESS_KEY {{ '}}' }}
-          aws-region: ${{ '{{' }} secrets.AWS_DEFAULT_REGION {{ '}}' }}
+          aws-access-key-id: {% raw %} ${{ secrets.AWS_ACCESS_KEY_ID }} {% endraw %}
+          aws-secret-access-key: {% raw %} ${{ secrets.AWS_SECRET_ACCESS_KEY }} {% endraw %}
+          aws-region: {% raw %} ${{ secrets.AWS_DEFAULT_REGION }} {% endraw %}
         
       - name: Login to Amazon ECR
         id: login-ecr
@@ -28,9 +28,9 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          ECR_REGISTRY: ${{ '{{' }} steps.login-ecr.outputs.registry {{ '}}' }}
+          ECR_REGISTRY: {% raw %} ${{ steps.login-ecr.outputs.registry }} {% endraw %}
           ECR_REPOSITORY: {{cookiecutter.adapter_code}}
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: {% raw %} ${{ github.sha }} {% endraw %}
         run: |
           docker build -f ./Dockerfile.lambda -t $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}-lambda .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${IMAGE_TAG}-lambda
@@ -41,8 +41,8 @@ jobs:
         env:
           ECR_REPOSITORY: {{cookiecutter.adapter_code}}
           LAMBDA_NAME: {{cookiecutter.adapter_code}}
-          IMAGE_TAG: ${{ github.sha }}
-          AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          IMAGE_TAG: {% raw %} ${{ github.sha }} {% endraw %}
+          AWS_REGION: {% raw %} ${{ secrets.AWS_DEFAULT_REGION }} {% endraw %}
           AWS_ACCOUNT_ID: {{cookiecutter.aws_account_id}}
         run: |
           aws lambda update-function-code --function-name $LAMBDA_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${IMAGE_TAG}-lambda

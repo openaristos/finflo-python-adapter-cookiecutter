@@ -1,10 +1,10 @@
 {
-	"artifact_name": "my-adapter",
-	"adapter_name": "MyAdapter",
+	"artifact_name": "finflo-fred",
+	"adapter_name": "FinFlo FRED",
 	"adapter_code": "{{ cookiecutter.adapter_name|lower|replace(' ', '_') }}",
-	"adapter_description": "MyAdapter Description",
-	"adapter_author": "John Doe",
-	"adapter_perspective": "customer",
+	"adapter_description": "FinFlo FRED",
+	"adapter_author": "Aristos Data, LLC.",
+	"adapter_perspective": "fred",
 	"adapter_migrations_uri": "s3://bakplane-dev-migrations-internal/{{ cookiecutter.adapter_name|lower|replace(' ', '_') }}",
 	"aws_region": "us-east-2",
 	"aws_account_id": "591869475757"
